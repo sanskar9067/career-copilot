@@ -29,7 +29,6 @@ class State(TypedDict):
     result: str #generated result
     
 def extract_skills(state: State):
-    print("\n\nExtracting skills from user query:", state)
     embeddings = OpenAIEmbeddings(
         model="text-embedding-3-small",
     )
@@ -54,7 +53,6 @@ def extract_skills(state: State):
     return {"skills": openai_response.output_text}
 
 def extract_required_skills(state: State):
-    print("\n\nExtracting required skills from job description:", state)
     SYSTEM_PROMPT = f"""
     You are an expert Job Description Analysis Agent.
     You are given a job description, current role and target role, and you need to extract the required skills for the job.
@@ -71,7 +69,6 @@ def extract_required_skills(state: State):
     return {"required_skills": openai_response.output_text}
 
 def extract_market_demand(state: State):
-    print("\n\nExtracting market demand from job description:", state)
     SYSTEM_PROMPT = f"""
     You are an expert Market Demand Analysis Agent.
     You are given a job description, current role and target role, and you need to extract the market demand for the job.
@@ -89,7 +86,6 @@ def extract_market_demand(state: State):
     return {"market_demand": openai_response.output_text}
 
 def generate_roadmap(state: State):
-    print("\n\nGenerating roadmap for the job:", state)
     SYSTEM_PROMPT = f"""
     You are an expert Roadmap Generation Agent.
     You are given a job description, current role and target role, and you need to generate a roadmap for the job.
@@ -109,7 +105,6 @@ def generate_roadmap(state: State):
     return {"roadmap": openai_response.output_text}
 
 def generate_project_ideas(state: State):
-    print("\n\nGenerating project ideas for the job:", state)
     SYSTEM_PROMPT = f"""
     You are an expert Project Ideas Generation Agent.
     You are given a job description, current role and target role, duration, hours per day,
@@ -133,7 +128,6 @@ def generate_project_ideas(state: State):
     return {"project_ideas": openai_response.output_text}
 
 def generate_result(state: State):
-    print("\n\nChecking result for the job:", state)
     SYSTEM_PROMPT = f"""
     You are an expert Result Checker Agent.
     You are given a job description, current role and target role, duration, hours per day,
@@ -152,7 +146,7 @@ def generate_result(state: State):
     Roadmap: {state['roadmap']}
     Project Ideas: {state['project_ideas']}
 
-    Return your response in the form of true or false only.
+    Return your response in the form of true if it is good otherwise return false only. and return the reason for the same.
     """
     openai_response = client.responses.create(
         model="gpt-5",
@@ -161,8 +155,7 @@ def generate_result(state: State):
     return {"result": openai_response.output_text}
 
 def check_result(state: State)->Literal["generate_roadmap", "end_node"]: # type: ignore
-    print("\n\nChecking result for the job:", state)
-    if state["result"] == "true":
+    if state["result"] == "false":
         return "generate_roadmap"
     else:
         return "end_node"
