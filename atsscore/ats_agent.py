@@ -18,7 +18,9 @@ def score_resume(resume_path, current_role, target_role):
         - 0% for a resume that is a perfect mismatch for the job description.
         - 50% for a resume that is a partial match for the job description.
         The current role is {current_role} and the target role is {target_role}.
+
         Return the score in JSON format only. No Markdown.
+        also return the reason for the score and how to improve the score
         """
         client = OpenAI()
         response = client.responses.create(

@@ -8,7 +8,7 @@ def interviewer_agent(current_role, target_role, resume_data, job_description):
         SYSTEM_PROMPT = f"""
         You are an expert Technical Interview Question Generator.
 
-        Generate exactly 2 personalized interview questions using:
+        Generate exactly 10 personalized interview questions using:
 
         * Candidate Resume
         * Candidate Introduction
@@ -41,8 +41,8 @@ def interviewer_agent(current_role, target_role, resume_data, job_description):
 
         Requirements:
 
-        * Exactly 2 questions.
-        * IDs from 1 to 2.
+        * Exactly 10 questions.
+        * IDs from 1 to 10.
         * Categories: introduction, experience, project, technical, role_specific, scenario.
         * Difficulty: easy, medium, hard.
         * No markdown.
