@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'resumeanalyzer',
     'atsscore',
     'intervieweragent',
+    'roadmapgenerator',
 ]
 
 MIDDLEWARE = [

@@ -21,6 +21,7 @@ from userinfo.views import create_user_info, update_user_info
 from resumeanalyzer.views import index_resume_view, retrieve_resume_view
 from atsscore.views import score_resume_view
 from intervieweragent.views import interviewer_agent_view, get_interview_plan_view, generate_results_view
+from roadmapgenerator.views import roadmap_generator_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', signup, name='signup'),
@@ -33,4 +34,5 @@ urlpatterns = [
     path('interviewer_agent/', interviewer_agent_view, name='interviewer_agent'),
     path('get_interview_plan/', get_interview_plan_view, name='get_interview_plan'),
     path('generate_results/', generate_results_view, name='generate_results'),
+    path('roadmap_generator/', roadmap_generator_view, name='roadmap_generator'),
 ]
